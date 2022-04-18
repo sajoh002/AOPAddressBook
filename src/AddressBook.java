@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class AddressBook extends Frame {
 	static HashMap<String, Address> addressBook;
-	static String oldName;
-	static Address oldAddress;
+	String oldName;
+	Address oldAddress;
 	
 	static Label nameLabel;
 	static Label streetLabel;
@@ -121,7 +121,7 @@ public class AddressBook extends Frame {
 		public void actionPerformed(ActionEvent evt) {
 			String name = nameInput.getText();
 			Address address = addressBook.get(name);
-			saveContact(name, address);
+			deleteContact(name, address);
 			addressBook.remove(name);
 		}
 	}
@@ -131,7 +131,7 @@ public class AddressBook extends Frame {
 		public void actionPerformed(ActionEvent evt) {
 			String name = nameInput.getText();
 			Address address = addressBook.get(name);
-			saveContact(name, address);
+			updateContact(name, address);
 			Address updatedAddress = new Address(streetInput.getText(), cityInput.getText(), 
 					stateInput.getText(), zipInput.getText(), phoneInput.getText());
 			addressBook.put(name, updatedAddress);
@@ -194,7 +194,12 @@ public class AddressBook extends Frame {
 		}
 	}
 	
-	public void saveContact(String name, Address address) {
+	public void updateContact(String name, Address address) {
+		this.oldName = name;
+		this.oldAddress = address;
+	}
+	
+	public void deleteContact(String name, Address address) {
 		this.oldName = name;
 		this.oldAddress = address;
 	}
